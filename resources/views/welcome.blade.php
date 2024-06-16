@@ -9,9 +9,8 @@
 <div class="container">
     <div class=" d-flex justify-content-between align-iteams-center my-5">
         <div class="h2">All TODOS</div>
-        <a href="" class="btn btn-primary btn-lg">Add Todo</a>
+        <a href="{{route("todo.create")}}" class="btn btn-primary btn-lg">Add Todo</a>
     </div>
-
     <table class="table table-stripped table-dark">
         <tr>
             <th>Name</th>
@@ -19,14 +18,18 @@
             <th>Due Date</th>
             <th>Action</th>
         </tr>
+        @foreach ($todos as $todo)
         <tr valign='middle'>
-            <td>Name</td>
-            <td>Work</td>
-            <td>Due Date</td>
+            <td>{{$todo->name}}</td>
+            <td>{{$todo->work}}</td>
+            <td>{{$todo->dueDate}}</td>
             <td>
-                <a href="" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{{route("todo.edit",$todo->id)}}" class="btn btn-success btn-sm ">Update</a>
+                <a href="{{route("todo.delete",$todo->id)}}" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
+        @endforeach
+        
     </table>
 </div>
 @endsection
