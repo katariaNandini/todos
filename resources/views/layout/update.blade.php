@@ -1,5 +1,4 @@
-@extends('layout.main')\
-
+@extends('layout.main')
 
 @push('head')
 <title>Update Todo</title>
@@ -7,27 +6,30 @@
 
 @section('main-section')
 <div class="container">
-  <div class=" d-flex justify-content-between align-iteams-center my-5">
-    <div class="h2">Upadate Todo</div>
-    <a href="" class="btn btn-primary btn-lg">Back</a>
+  <div class="d-flex justify-content-between align-items-center my-5">
+    <div class="h2 text-neon">Update Todo</div>
+    <a href="{{route('todo.home')}}" class="btn custom-btn btn-2 btn-lg">Back</a>
   </div>
-<div class="card">
-  <div class="card-body">
-    <form action="{{route("todo.updateData")}}" method="POST">
-
-      @csrf
-
-      <label for="" class="form-label mt-4 ">Name</label>
-      <input type="text"name="name" class="form-control" value="{{$todo->name}}">      
-      <label for="" class="form-label mt-4 ">Work</label>
-      <input type="text"name="work" class="form-control" value="{{$todo->work}}">      
-      <label for="" class="form-label mt-4 ">Due date</label>
-      <input type="date"name="dueDate" class="form-control" value="{{$todo->dueDate}}">
-      <input type="number" name="id" value="{{$todo->id}}" hidden>
-      <button class="btn btn-primary btn-lg mt-4">Update Todo</button>
-    </form>
+  <div class="card card-custom">
+    <div class="card-body">
+      <form action="{{route('todo.updateData')}}" method="POST">
+        @csrf
+        <div class="mb-3">
+          <label for="name" class="form-label text-neon">Name</label>
+          <input type="text" name="name" id="name" class="form-control form-control-custom" value="{{$todo->name}}">
+        </div>
+        <div class="mb-3">
+          <label for="work" class="form-label text-neon">Work</label>
+          <input type="text" name="work" id="work" class="form-control form-control-custom" value="{{$todo->work}}">
+        </div>
+        <div class="mb-3">
+          <label for="dueDate" class="form-label text-neon">Due date</label>
+          <input type="date" name="dueDate" id="dueDate" class="form-control form-control-custom" value="{{$todo->dueDate}}">
+        </div>
+        <input type="number" name="id" value="{{$todo->id}}" hidden>
+        <button class="btn custom-btn btn-up btn-lg mt-4">Update Todo</button>
+      </form>
+    </div>
   </div>
-</div>
-
 </div>
 @endsection
