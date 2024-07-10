@@ -4,17 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\todos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\user;
 
 class todosController extends Controller
 {
+    // public function index()
+    // {
+    //     $todos = Auth::user()->todos()->get(); // Get todos for the authenticated user
+    //     return view('todos.welcome', compact('todos'));
+    // }
 
-
+    // public function index()
+    // {
+    //     $todos = todos::all();
+    //     $data = compact('todos');
+    //     return  view("welcome")->with($data);
+    // }
     public function index()
     {
-        $todos = todos::all();
-        $data = compact('todos');
-        return  view("welcome")->with($data);
+        $todos = todos::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        return view('home', compact('todos'));
     }
+
     public function store(Request $request)
     {
         $request->validate(
@@ -28,6 +40,8 @@ class todosController extends Controller
         $todo->name = $request['name'];
         $todo->work = $request['work'];
         $todo->dueDate = $request['dueDate'];
+        $todo->user_id = Auth::user()->id; // Set user_id here
+
         $todo->save();
         return redirect(route("todo.home"));
     }
